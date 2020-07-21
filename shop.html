@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一个简单的购物车</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <table>
+                <tr>
+                    <td>🆔 商品编号</td>
+                    <td>🛍 商品名</td>
+                    <td>💰 价格</td>
+                    <td>📦 数量</td>
+                    <td>🛒 操作</td>
+                    <td>☑️ 选择</td>
+
+                </tr>
+                <tr v-for="(item,index) in items" :key="item.id">
+                    <td>{{item.id+1}}</td>
+                    <td>{{item.name}}</td>
+                    <td>${{item.price}}</td>
+                    <td>
+                        <button class="ad" @click='dec(index)'> - </button>
+                        <input type="text" v-model="item.count" @change='cal_pri'>
+                        <button class="ad" @click='inc(index)'> + </button>
+                    </td>
+                    <td>
+                        <button @click='del(index)'>❌</button>
+                    </td>
+                    <td>
+                        <input type="checkbox" :value="index" v-model="checked" @change="cal_pri">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="total-bar">
+            您已选择结算的商品总价为:
+            <div id="price-display">$ {{t_pri}}</div>
+        </div>
+    </div>
+</body>
+<style>
+    #total-bar {
+        margin: 2em 5em;
+        font-size: 20px;
+        padding: 1em;
+        color: white;
+        background-color: rgb(56, 56, 56);
+    }
+
+    #price-display {
+        text-align: right;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        color: coral;
+        font-size: 60px;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin: auto;
+    }
+
+    .ad {
+        width: 25px;
+    }
+
+    button {
+        border: 1px solid gray;
+        border-radius: 0px;
+        background-color: rgb(233, 233, 233);
+        outline: none;
+    }
+
+    input {
+
+        width: 20px;
+        outline: none;
+        border: 1px solid gray;
+        border-radius: 0px;
+        text-align: center;
+    }
+
+    table,
+    th,
+    td {
+        height: 40px;
+        min-width: 100px;
+        padding: 8px;
+        border: 1px solid gray;
+        text-align: center;
+    }
+</style>
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            items: [
+                {
+                    id: 0,
+                    name: "ASML光刻机(5nm) 2020最新款",
+                    price: 999999999,
+                    date: "2029-8",
+                    count: 5
+                },
+                {
+                    id: 1,
+                    name: "华为麒麟990系列处理器设计图",
+                    price: 11111432,
+                    date: "2029-8",
+                    count: 1
+                }
+            ],
+            checked: [],
+            t_pri: 0
+        },
+        methods: {
+            inc(index) {
+                this.cal_pri()
+                this.items[index].count++
+            },
+            dec(index) {
+                this.cal_pri()
+                if (this.items[index].count == 1) {
+                    alert("商品数量已为单件，如需删除请点击删除")
+                    return
+                }
+                this.items[index].count--
+            },
+            del(index) {
+                this.cal_pri()
+                if (this.items.length == 1) {
+                    alert("购物车为空")
+                }
+                this.items.splice(index, 1)
+            },
+            cal_pri() {
+                this.t_pri = 0
+                this.checked.forEach(i => {
+                    this.t_pri += this.items[i].price * this.items[i].count
+                });
+
+            }
+        }
+
+    })
+</script>
+
+</html>
