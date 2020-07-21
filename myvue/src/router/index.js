@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import layout from '@/layout/index'
 import login from '@/components/login'
+import manage from '@/view/home/index'
+import user from '@/view/user/index'
 
 
 Vue.use(Router)
@@ -18,8 +20,18 @@ export const constantRoutes = [
         // hidden: true
     },
     {
-        path: '/manage',
-        component: layout
+        path: '/',
+        component: layout,
+        children: [
+            {
+                path: '/manage',
+                component: manage
+            },
+            {
+                path: '/user',
+                component: user
+            }
+        ]
         // hidden: true
     }
     //   {

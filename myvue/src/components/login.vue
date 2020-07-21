@@ -33,9 +33,9 @@ export default {
         password: this.form.password
       };
       login(data).then(res => {
-        console.log(res);
-        if (res.status == 1) {
-          this.router.push("/");
+        console.log(res.data.success);
+        if (res.data.status == 1) {
+          this.$router.push("/");
         }
       });
       console.log("submit!");

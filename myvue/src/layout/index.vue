@@ -9,7 +9,9 @@
             </template>
             <el-menu-item-group>
               <template slot="title">分组一</template>
-              <el-menu-item index="1-1">选项1</el-menu-item>
+              <el-menu-item index="1-1">
+                <router-link to="/user">用户列表</router-link>
+              </el-menu-item>
               <el-menu-item index="1-2">选项2</el-menu-item>
             </el-menu-item-group>
             <el-menu-item-group title="分组2">
@@ -71,11 +73,7 @@
         </el-header>
 
         <el-main>
-          <el-table :data="tableData">
-            <el-table-column prop="date" label="日期" width="140"></el-table-column>
-            <el-table-column prop="name" label="姓名" width="120"></el-table-column>
-            <el-table-column prop="address" label="地址"></el-table-column>
-          </el-table>
+          <router-view />
         </el-main>
       </el-container>
     </el-container>
