@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import layout from '@/layout/index'
-// import index from '@/components/index2'
+import login from '@/components/login'
 
 
 Vue.use(Router)
@@ -12,11 +12,11 @@ Vue.use(Router)
 
 
 export const constantRoutes = [
-    // {
-    //     path: '/login',
-    //     component: login,
-    //     // hidden: true
-    // },
+    {
+        path: '/login',
+        component: login,
+        // hidden: true
+    },
     {
         path: '/manage',
         component: layout
